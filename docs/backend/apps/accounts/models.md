@@ -35,11 +35,11 @@ Extended user information:
   - phone_number: string (required)
   - addresses: ManyToMany to Address through AddressRelation
   - emergency_contacts: OneToMany to EmergencyContact
+  - communication_channels: ManyToMany to CommunicationChannel through UserChannelPreference
+  - notification_preferences: ManyToMany to NotificationType through NotificationPreference
 - Preferences (All Optional)
   - language: string (default: 'en')
   - timezone: string (default: 'UTC')
-  - notification_preferences: json
-  - privacy_settings: json
 
 ## HealthcareProvider
 Extended profile for medical professionals:
@@ -116,6 +116,8 @@ External service connections:
 - User -> Integration (OneToOne)
 - User -> UserConsentStatus (OneToOne)
 - User -> UserConsent (OneToMany)
+- User -> CommunicationChannel (ManyToMany through UserChannelPreference)
+- User -> NotificationType (ManyToMany through NotificationPreference)
 - Note: Permission relationships will be defined once permission system is designed
 
 ## Indexing
