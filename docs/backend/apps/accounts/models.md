@@ -86,19 +86,19 @@ Security-related information:
   - audit_trails: foreign key to AuditTrail (one-to-many)
 
 ## Permissions
-Role-based access control:
-- Role Definitions
-  - role_name: string
-  - role_description: text
-  - permission_level: integer
-- Access Rights
-  - module_permissions: json
-  - data_access_level: enum[READ, WRITE, ADMIN]
-  - restricted_actions: array
-- Custom Permissions
-  - custom_rules: json
-  - temporary_access: json
-  - delegation_rights: boolean
+NOTE: Permission system structure to be determined.
+Key considerations for implementation:
+- Role-based access control requirements
+- Integration with Django's authentication system
+- Compliance with healthcare security standards
+- Scalability needs
+- Audit requirements
+
+The final permission structure will be designed after:
+- Security architecture review
+- Regulatory compliance assessment
+- System access pattern analysis
+- Administrative workflow requirements
 
 ## Integration
 External service connections:
@@ -115,8 +115,8 @@ External service connections:
 - User -> Profile (OneToOne)
 - User -> HealthcareProvider (OneToOne, required only for doctors)
 - User -> AccountSecurity (OneToOne)
-- User -> Permissions (ManyToMany)
 - User -> Integration (OneToOne)
+- Note: Permission relationships will be defined once permission system is designed
 
 ## Indexing
 - username: unique index
