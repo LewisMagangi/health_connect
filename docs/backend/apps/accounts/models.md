@@ -63,9 +63,17 @@ Extended profile for medical professionals:
 Security-related information:
 - Security Settings
   - password_last_changed: timestamp
-  - security_questions: array
   - failed_login_attempts: integer
   - last_password_reset: timestamp
+
+- Multi-Factor Authentication (Implementation Pending)
+  NOTE: MFA strategy and implementation to be determined.
+  Key considerations will include:
+  - Authentication methods
+  - Backup and recovery processes
+  - Security standards compliance
+  - Audit requirements
+
 - Access Control (Token implementation pending)
   - NOTE: Token management strategy to be determined
   - Options under consideration:
