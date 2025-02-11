@@ -18,6 +18,10 @@ Extends Django's AbstractUser model:
   - two_factor_enabled: boolean (optional)
   - account_locked: boolean (required, default: false)
   - login_attempts: integer (required, default: 0)
+- Consent Information
+  - consent_status: OneToOne to UserConsentStatus
+  - consents: OneToMany to UserConsent
+  - requires_consent_update: boolean (computed)
 
 ## Profile
 Extended user information:
@@ -110,6 +114,8 @@ External service connections:
 - User -> HealthcareProvider (OneToOne, required only for doctors)
 - User -> AccountSecurity (OneToOne)
 - User -> Integration (OneToOne)
+- User -> UserConsentStatus (OneToOne)
+- User -> UserConsent (OneToMany)
 - Note: Permission relationships will be defined once permission system is designed
 
 ## Indexing
