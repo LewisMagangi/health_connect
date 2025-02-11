@@ -1,31 +1,46 @@
 # Tools App Models
 
-## HealthCalculator Model
-Defines different health calculation tools.
+NOTE: This is an initial implementation focusing on core functionality.
+Additional tools and features will be added in future iterations.
 
-```python
-class HealthCalculator(models.Model):
-    name = models.CharField(max_length=100)
-    type = models.CharField(choices=[
-        ('BMI', 'Body Mass Index'),
-        ('CALORIE', 'Calorie Counter'),
-        ('HYDRATION', 'Hydration Calculator')
-    ])
-    formula = models.JSONField()
-    description = models.TextField()
-```
+## Common Fields
+Fields shared across models:
+- Audit Information (Auto-generated)
+  - created_at: timestamp
+  - updated_at: timestamp
+  - created_by: foreign key to User
+  - updated_by: foreign key to User
+
+## HealthCalculator Model
+Basic health calculation tools:
+- Basic Information
+  - name: string (required)
+  - type: enum[BMI, CALORIE, HYDRATION] (required)
+  - formula: json (required)
+  - description: text (required)
+  - status: enum[ACTIVE, DEPRECATED] (required)
 
 ## AssessmentTool Model
-Manages health assessment questionnaires.
+Simple health assessment questionnaires:
+- Basic Information
+  - title: string (required)
+  - category: enum[MENTAL_HEALTH, PHYSICAL_FITNESS, NUTRITION] (required)
+  - questions: json (required)
+  - scoring_logic: json (required)
+  - status: enum[DRAFT, ACTIVE, ARCHIVED] (required)
 
-```python
-class AssessmentTool(models.Model):
-    title = models.CharField(max_length=200)
-    questions = models.JSONField()
-    scoring_logic = models.JSONField()
-    category = models.CharField(choices=[
-        ('MENTAL_HEALTH', 'Mental Health'),
-        ('PHYSICAL_FITNESS', 'Physical Fitness'),
-        ('NUTRITION', 'Nutrition')
-    ])
-```
+## Relationships
+- HealthCalculator -> User (creator reference)
+- AssessmentTool -> User (creator reference)
+
+## Indexing
+- HealthCalculator.type: index
+- AssessmentTool.category + status: composite index
+
+## Future Enhancements (Planned)
+- Evidence-based reference system
+- Advanced calculation engines
+- Comprehensive assessment frameworks
+- Integration with wearables and EHR
+- Detailed reporting and analytics
+- Tool categorization system
