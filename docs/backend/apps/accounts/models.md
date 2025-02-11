@@ -72,10 +72,12 @@ Security-related information:
   - refresh_token: string
   - access_token: string
   - token_expiry: timestamp
-- Activity Log
-  - login_history: array
-  - device_history: array
-  - ip_addresses: array
+- Activity Tracking
+  - last_activity: timestamp
+  - current_session_id: string
+  - active_devices_count: integer
+  - activity_logs: foreign key to ActivityLog (one-to-many)
+  - audit_trails: foreign key to AuditTrail (one-to-many)
 
 ## Permissions
 Role-based access control:

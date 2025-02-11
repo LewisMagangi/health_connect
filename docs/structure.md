@@ -73,8 +73,31 @@ docs/
 │   ├── components/
 │   └── state/
 │
-└── project/
-    ├── overview.md
-    ├── tech_stack.md
-    └── contribution.md
+├── infrastructure/
+│   ├── docker/
+│   │   ├── configuration.md
+│   │   └── deployment.md
+│   ├── logs/
+│   │   ├── audit_logs.md
+│   │   ├── django_logs.md
+│   │   └── error_logs.md
+│   ├── monitoring/
+│   │   ├── metrics.md
+│   │   └── alerts.md
+│   └── deployment/
+│       ├── procedures.md
+│       └── environments.md
+│
+├── project/
+│   ├── overview.md
+│   ├── tech_stack.md
+│   └── contribution.md
+│
+└── testing/
+    ├── backend/
+    │   └── unit_tests.md
+    ├── frontend/
+    │   └── integration_tests.md
+    └── e2e/
+        └── acceptance_tests.md
 ```

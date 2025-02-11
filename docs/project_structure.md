@@ -226,9 +226,17 @@ health_connect/
 │   └── docker-compose.yml
 │
 ├── logs/                   # Application logs
-│   ├── django.log
-│   ├── celery.log
-│   └── nginx.access.log
+│   ├── audit_logs/        # Security and compliance audit logs
+│   │   ├── activity/      # User activity logs
+│   │   └── system/        # System-level audit logs
+│   ├── django_logs/       # Django application logs
+│   │   ├── debug.log      # Development debugging
+│   │   ├── info.log       # General information
+│   │   └── errors.log     # Application errors
+│   └── error_logs/        # Detailed error tracking
+│       ├── backend/       # Backend service errors
+│       ├── frontend/      # Frontend error logs
+│       └── system/        # System-level errors
 │
 ├── requirements/          # Split requirements
 │   ├── base.txt
