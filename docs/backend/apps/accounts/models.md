@@ -68,10 +68,16 @@ Security-related information:
   - security_questions: array
   - failed_login_attempts: integer
   - last_password_reset: timestamp
-- Access Tokens
-  - refresh_token: string
-  - access_token: string
-  - token_expiry: timestamp
+- Access Control (Token implementation pending)
+  - NOTE: Token management strategy to be determined
+  - Options under consideration:
+    * Dedicated token model
+    * External OAuth provider
+    * Third-party authentication service
+  - Final implementation will be based on:
+    * Security requirements
+    * Scalability needs
+    * Compliance standards
 - Activity Tracking
   - last_activity: timestamp
   - current_session_id: string
