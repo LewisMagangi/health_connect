@@ -41,24 +41,6 @@ Extended user information:
   - language: string (default: 'en')
   - timezone: string (default: 'UTC')
 
-## HealthcareProvider
-Extended profile for medical professionals:
-- Professional Information (All Required)
-  - license_number: string
-  - specializations: array
-  - qualifications: array
-  - years_of_experience: integer
-  - practicing_since: date
-- Verification (All Required)
-  - license_verified: boolean
-  - verification_documents: array
-  - verification_status: enum[PENDING, VERIFIED, REJECTED]
-- Practice Details
-  - hospital_affiliations: array (required)
-  - office_hours: json (required)
-  - consultation_fee: decimal (required)
-  - available_for_telemedicine: boolean (optional)
-
 ## AccountSecurity
 Security-related information:
 - Security Settings
@@ -119,7 +101,7 @@ External service connections:
 
 ## Relationships (All Required)
 - User -> Profile (OneToOne)
-- User -> MedicalProfessional (OneToOne, for healthcare providers)
+- User -> MedicalProfessional (OneToOne, defined in doctors app with audit fields)
 - User -> AccountSecurity (OneToOne)
 - User -> Integration (OneToOne)
 - User -> UserConsentStatus (OneToOne)
@@ -132,5 +114,4 @@ External service connections:
 - username: unique index
 - email: unique index
 - phone_number: unique index
-- license_number: unique index (for healthcare providers)
-- provider_type: index (for healthcare providers)
+- MedicalProfessional indexes defined in doctors app
