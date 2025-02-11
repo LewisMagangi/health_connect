@@ -29,14 +29,8 @@ Extended user information:
   - bio: text (optional)
 - Contact Information
   - phone_number: string (required)
-  - emergency_contact: json (required for patients, optional for others)
-  - address: json (optional) {
-    street: string (optional)
-    city: string (optional)
-    state: string (optional)
-    country: string (optional)
-    postal_code: string (optional)
-  }
+  - addresses: ManyToMany to Address through AddressRelation
+  - emergency_contacts: OneToMany to EmergencyContact
 - Preferences (All Optional)
   - language: string (default: 'en')
   - timezone: string (default: 'UTC')
