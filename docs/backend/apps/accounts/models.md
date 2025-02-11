@@ -111,7 +111,7 @@ External service connections:
 
 ## Relationships (All Required)
 - User -> Profile (OneToOne)
-- User -> HealthcareProvider (OneToOne, required only for doctors)
+- User -> MedicalProfessional (OneToOne, for healthcare providers)
 - User -> AccountSecurity (OneToOne)
 - User -> Integration (OneToOne)
 - User -> UserConsentStatus (OneToOne)
@@ -125,3 +125,4 @@ External service connections:
 - email: unique index
 - phone_number: unique index
 - license_number: unique index (for healthcare providers)
+- provider_type: index (for healthcare providers)
