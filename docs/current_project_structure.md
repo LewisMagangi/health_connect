@@ -1,6 +1,6 @@
 # Health Connect - Current Project Structure
 
-## Directory Structure as of 2025-02-14 16:08:54
+## Directory Structure as of 2025-02-14 16:33:49
 ```
 health_connect/
 ├── health_connect/
@@ -9,23 +9,106 @@ health_connect/
 │   ├── manage.py
 │   ├── requirements.txt
 │   ├── update_structure.py
-│   ├── backend/
-│   │   ├── apps/
-│   │   │   ├── accounts/
-│   │   │   ├── analytics/
-│   │   │   ├── appointments/
-│   │   │   ├── doctors/
-│   │   │   ├── lifestyle/
-│   │   │   ├── medical_records/
-│   │   │   ├── messaging/
-│   │   │   ├── notifications/
-│   │   │   ├── patients/
-│   │   │   ├── tools/
-│   │   │   ├── users/
-│   │   │   │   ├── migrations/
-│   │   ├── templates/
-│   │   │   ├── accounts/
-│   │   │   ├── users/
+│   ├── apps/
+│   │   ├── accounts/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── analytics/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── appointments/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── billing/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── communications/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── lifestyle/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── medicalproffesionals/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── medicalrecords/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── resources/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── tools/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
+│   │   ├── users/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── apps.py
+│   │   │   ├── models.py
+│   │   │   ├── tests.py
+│   │   │   ├── views.py
+│   │   │   ├── migrations/
+│   │   │   │   ├── __init__.py
 │   ├── core/
 │   │   ├── views.py
 │   ├── docs/
@@ -91,13 +174,4 @@ health_connect/
 │   ├── templates/
 │   │   ├── base.html
 │   │   ├── home.html
-│   ├── users/
-│   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── models.py
-│   │   ├── tests.py
-│   │   ├── views.py
-│   │   ├── migrations/
-│   │   │   ├── __init__.py
 ```
