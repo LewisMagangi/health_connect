@@ -1,6 +1,6 @@
 # Health Connect - Current Project Structure
 
-## Directory Structure as of 2025-02-14 15:33:48
+## Directory Structure as of 2025-02-14 16:08:54
 ```
 health_connect/
 ├── health_connect/
@@ -9,9 +9,27 @@ health_connect/
 │   ├── manage.py
 │   ├── requirements.txt
 │   ├── update_structure.py
+│   ├── backend/
+│   │   ├── apps/
+│   │   │   ├── accounts/
+│   │   │   ├── analytics/
+│   │   │   ├── appointments/
+│   │   │   ├── doctors/
+│   │   │   ├── lifestyle/
+│   │   │   ├── medical_records/
+│   │   │   ├── messaging/
+│   │   │   ├── notifications/
+│   │   │   ├── patients/
+│   │   │   ├── tools/
+│   │   │   ├── users/
+│   │   │   │   ├── migrations/
+│   │   ├── templates/
+│   │   │   ├── accounts/
+│   │   │   ├── users/
 │   ├── core/
 │   │   ├── views.py
 │   ├── docs/
+│   │   ├── current_project_structure.md
 │   │   ├── overview.md
 │   │   ├── project_structure.md
 │   │   ├── structure.md
