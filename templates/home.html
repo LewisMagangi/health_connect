@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome - Health Connect{% endblock title %}
+
+{% block content %}
+<div class="hero-section">
+    <h1>Welcome to Health Connect</h1>
+    <p>Your trusted platform for connecting with healthcare providers.</p>
+    
+    <div class="cta-buttons">
+        {% if not user.is_authenticated %}
+            <a href="#" class="btn btn-primary">Get Started</a>
+            <a href="#" class="btn btn-secondary">Learn More</a>
+        {% else %}
+            <a href="#" class="btn btn-primary">View Dashboard</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="features-section">
+    <h2>Our Services</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Health Records</h3>
+            <p>Securely store and manage your medical records in one place.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Provider Network</h3>
+            <p>Connect with healthcare providers in your area.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Appointments</h3>
+            <p>Schedule and manage your medical appointments easily.</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
