@@ -3,187 +3,198 @@
 ## Directory Organization
 ```
 health_connect/
-├── backend/                    # Django Backend Application
-│   ├── health_connect/        # Django Main Project
+├── core/                   # Core application
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py           # Core views including home
+│
+├── templates/             # Root level templates
+│   ├── base.html         # Base template with common structure
+│   └── home.html         # Homepage template
+│
+├── static/               # Static files
+│   └── css/
+│       └── main.css      # Main stylesheet
+│
+├── health_connect/       # Project configuration
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── asgi.py
+│
+├── apps/                 # Django applications
+│   ├── users/           # User authentication and profiles
+│   │   ├── migrations/
+│   │   ├── templates/users/     # User-related templates
+│   │   │   ├── login.html
+│   │   │   ├── register.html
+│   │   │   └── profile.html
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py          # Base user model
+│   │   │   ├── provider.py      # Healthcare provider model
+│   │   │   └── patient.py       # Patient model
+│   │   ├── views/
+│   │   │   ├── auth.py          # Authentication views
+│   │   │   ├── provider.py      # Provider management
+│   │   │   └── patient.py       # Patient management
+│   │   ├── urls.py             # URL routing
 │   │   ├── __init__.py
-│   │   ├── settings/         # Split settings
-│   │   │   ├── base.py
-│   │   │   ├── development.py
-│   │   │   └── production.py
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── serializers/
+│   │   ├── permissions.py
+│   │   └── tasks.py
+│   │
+│   ├── appointments/
+│   │   ├── migrations/
+│   │   ├── templates/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── forms.py
+│   │   ├── models.py
 │   │   ├── urls.py
-│   │   ├── wsgi.py
-│   │   ├── asgi.py
-│   │   └── celery.py        # Celery configuration
+│   │   ├── views.py
+│   │   └── tests.py
+│   ├── messaging/
+│   │   ├── migrations/
+│   │   ├── templates/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   └── tests.py
+│   ├── doctors/
+│   │   ├── migrations/
+│   │   ├── templates/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   └── tests.py
+│   ├── patients/
+│   │   ├── migrations/
+│   │   ├── templates/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   └── tests.py
+│   ├── medical_records/
+│   │   ├── migrations/
+│   │   ├── templates/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   └── tests.py
+│   ├── notifications/
+│   │   ├── migrations/
+│   │   ├── templates/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   └── tests.py
+│   ├── lifestyle/       # Wellness and health tracking
+│   │   ├── migrations/
+│   │   ├── templates/lifestyle/ # Lifestyle-related templates
+│   │   │   ├── dashboard.html
+│   │   │   ├── tracking.html
+│   │   │   └── plans.html
+│   │   ├── views/
+│   │   │   ├── __init__.py
+│   │   │   ├── dashboard.py
+│   │   │   └── tracking.py
+│   │   ├── urls.py             # URL routing
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── models.py     # Wellness plans, tracking
+│   │   ├── serializers.py
+│   │   ├── tasks.py      # Progress tracking
+│   │   └── tests.py
 │   │
-│   ├── apps/                 # Django applications
-│   │   ├── users/           # User authentication and profiles
-│   │   │   ├── migrations/
-│   │   │   ├── templates/users/     # User-related templates
-│   │   │   │   ├── login.html
-│   │   │   │   ├── register.html
-│   │   │   │   └── profile.html
-│   │   │   ├── models/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── user.py          # Base user model
-│   │   │   │   ├── provider.py      # Healthcare provider model
-│   │   │   │   └── patient.py       # Patient model
-│   │   │   ├── views/
-│   │   │   │   ├── auth.py          # Authentication views
-│   │   │   │   ├── provider.py      # Provider management
-│   │   │   │   └── patient.py       # Patient management
-│   │   │   ├── urls.py             # URL routing
+│   ├── tools/           # Health management tools
+│   │   ├── migrations/
+│   │   ├── templates/tools/  # Tools templates
+│   │   │   ├── calculator.html
+│   │   │   └── assessment.html
+│   │   ├── views/
 │   │   │   ├── __init__.py
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── serializers/
-│   │   │   ├── permissions.py
-│   │   │   └── tasks.py
-│   │   │
-│   │   ├── appointments/
-│   │   │   ├── migrations/
-│   │   │   ├── templates/
-│   │   │   ├── __init__.py
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── forms.py
-│   │   │   ├── models.py
-│   │   │   ├── urls.py
-│   │   │   ├── views.py
-│   │   │   └── tests.py
-│   │   ├── messaging/
-│   │   │   ├── migrations/
-│   │   │   ├── templates/
-│   │   │   ├── __init__.py
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── forms.py
-│   │   │   ├── models.py
-│   │   │   ├── urls.py
-│   │   │   ├── views.py
-│   │   │   └── tests.py
-│   │   ├── doctors/
-│   │   │   ├── migrations/
-│   │   │   ├── templates/
-│   │   │   ├── __init__.py
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── forms.py
-│   │   │   ├── models.py
-│   │   │   ├── urls.py
-│   │   │   ├── views.py
-│   │   │   └── tests.py
-│   │   ├── patients/
-│   │   │   ├── migrations/
-│   │   │   ├── templates/
-│   │   │   ├── __init__.py
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── forms.py
-│   │   │   ├── models.py
-│   │   │   ├── urls.py
-│   │   │   ├── views.py
-│   │   │   └── tests.py
-│   │   ├── medical_records/
-│   │   │   ├── migrations/
-│   │   │   ├── templates/
-│   │   │   ├── __init__.py
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── forms.py
-│   │   │   ├── models.py
-│   │   │   ├── urls.py
-│   │   │   ├── views.py
-│   │   │   └── tests.py
-│   │   ├── notifications/
-│   │   │   ├── migrations/
-│   │   │   ├── templates/
-│   │   │   ├── __init__.py
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── forms.py
-│   │   │   ├── models.py
-│   │   │   ├── urls.py
-│   │   │   ├── views.py
-│   │   │   └── tests.py
-│   │   ├── lifestyle/       # Wellness and health tracking
-│   │   │   ├── migrations/
-│   │   │   ├── templates/lifestyle/ # Lifestyle-related templates
-│   │   │   │   ├── dashboard.html
-│   │   │   │   ├── tracking.html
-│   │   │   │   └── plans.html
-│   │   │   ├── views/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── dashboard.py
-│   │   │   │   └── tracking.py
-│   │   │   ├── urls.py             # URL routing
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── models.py     # Wellness plans, tracking
-│   │   │   ├── serializers.py
-│   │   │   ├── tasks.py      # Progress tracking
-│   │   │   └── tests.py
-│   │   │
-│   │   ├── tools/           # Health management tools
-│   │   │   ├── migrations/
-│   │   │   ├── templates/tools/  # Tools templates
-│   │   │   │   ├── calculator.html
-│   │   │   │   └── assessment.html
-│   │   │   ├── views/
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── calculators.py
-│   │   │   ├── urls.py          # URL routing
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── models.py     # Tools and calculators
-│   │   │   ├── serializers.py
-│   │   │   └── tests.py
-│   │   │
-│   │   ├── analytics/       # Health data analytics
-│   │   │   ├── migrations/
-│   │   │   ├── templates/analytics/ # Analytics templates
-│   │   │   │   ├── dashboard.html
-│   │   │   │   ├── reports.html
-│   │   │   │   └── visualizations.html
-│   │   │   ├── views/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── dashboard.py
-│   │   │   │   └── reports.py
-│   │   │   ├── urls.py            # URL routing
-│   │   │   ├── admin.py
-│   │   │   ├── apps.py              # App configuration
-│   │   │   ├── models.py     # Analytics models
-│   │   │   ├── views.py      # Data visualization
-│   │   │   ├── utils.py      # Analysis helpers
-│   │   │   └── tests.py
-│   │   │
-│   │   ├── resources/       # Educational resources
-│   │   │   ├── migrations/
-│   │   │   ├── templates/resources/ # Resource templates
-│   │   │   │   ├── library.html
-│   │   │   │   ├── article_detail.html
-│   │   │   │   └── video_player.html
-│   │   │   ├── static/resources/   # Resource media files
-│   │   │   │   ├── videos/        # Health education videos
-│   │   │   │   ├── books/         # Medical literature
-│   │   │   │   ├── articles/      # Health articles
-│   │   │   │   └── research/      # Research papers
-│   │   │   ├── views/
-│   │   │   ├── models/
-│   │   │   │   ├── article.py
-│   │   │   │   ├── video.py
-│   │   │   │   └── document.py
-│   │   │   ├── urls.py
-│   │   │   └── // ...other app files...
+│   │   │   └── calculators.py
+│   │   ├── urls.py          # URL routing
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── models.py     # Tools and calculators
+│   │   ├── serializers.py
+│   │   └── tests.py
 │   │
-│   ├── config/               # Configuration Files
-│   │   ├── gunicorn.conf.py
-│   │   ├── uwsgi.ini
-│   │   ├── celery_worker.sh
-│   │   └── nginx.conf
+│   ├── analytics/       # Health data analytics
+│   │   ├── migrations/
+│   │   ├── templates/analytics/ # Analytics templates
+│   │   │   ├── dashboard.html
+│   │   │   ├── reports.html
+│   │   │   └── visualizations.html
+│   │   ├── views/
+│   │   │   ├── __init__.py
+│   │   │   ├── dashboard.py
+│   │   │   └── reports.py
+│   │   ├── urls.py            # URL routing
+│   │   ├── admin.py
+│   │   ├── apps.py              # App configuration
+│   │   ├── models.py     # Analytics models
+│   │   ├── views.py      # Data visualization
+│   │   ├── utils.py      # Analysis helpers
+│   │   └── tests.py
 │   │
-│   ├── scripts/             # Management scripts
-│   │   ├── manage_db.sh
-│   │   └── setup_dev_env.sh
+│   ├── resources/       # Educational resources
+│   │   ├── migrations/
+│   │   ├── templates/resources/ # Resource templates
+│   │   │   ├── library.html
+│   │   │   ├── article_detail.html
+│   │   │   └── video_player.html
+│   │   ├── static/resources/   # Resource media files
+│   │   │   ├── videos/        # Health education videos
+│   │   │   ├── books/         # Medical literature
+│   │   │   ├── articles/      # Health articles
+│   │   │   └── research/      # Research papers
+│   │   ├── views/
+│   │   ├── models/
+│   │   │   ├── article.py
+│   │   │   ├── video.py
+│   │   │   └── document.py
+│   │   ├── urls.py
+│   │   └── // ...other app files...
+│
+├── config/               # Configuration Files
+│   ├── gunicorn.conf.py
+│   ├── uwsgi.ini
+│   ├── celery_worker.sh
+│   └── nginx.conf
+│
+├── scripts/             # Management scripts
+│   ├── manage_db.sh
+│   └── setup_dev_env.sh
 │
 ├── frontend/                # React Frontend Application
 │   ├── public/             # Public assets
@@ -249,6 +260,22 @@ health_connect/
 ```
 
 ## Key Components Description
+
+### Core Application (`core/`)
+- Basic views and functionality
+- Home page rendering
+- Common utilities and helpers
+
+### Templates (`templates/`)
+- Root level template directory
+- Base template for consistent layout
+- Home page template
+- Application-specific templates will be added here
+
+### Static Files (`static/`)
+- CSS stylesheets
+  - main.css for global styling
+- Future JavaScript and image assets
 
 ### Backend Structure
 - **health_connect/**: Core Django configuration

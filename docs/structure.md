@@ -9,6 +9,10 @@ docs/
 │   │   └── api.md
 │   │
 │   ├── apps/
+│   │   ├── core/
+│   │   │   ├── views.md
+│   │   │   └── overview.md
+│   │   │
 │   │   ├── users/
 │   │   │   ├── models.md
 │   │   │   ├── views.md
