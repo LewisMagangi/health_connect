@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Patient Dashboard{% endblock %}
+
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome, {{ user.first_name }}</h1>
+        <p class="last-login">Last login: {{ user.last_login|date:"F j, Y, P" }}</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h2>Upcoming Appointments</h2>
+            {% if upcoming_appointments %}
+                <ul class="activity-list">
+                    {% for appointment in upcoming_appointments %}
+                    <li>
+                        <span class="appointment-time">{{ appointment.date_time|date:"M j, Y - H:i" }}</span>
+                        <span class="appointment-doctor">Dr. {{ appointment.provider.get_full_name }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-data">No upcoming appointments</p>
+            {% endif %}
+            <a href="{% url 'appointments:schedule' %}" class="btn btn-primary mt-3">Schedule New Appointment</a>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Health Summary</h2>
+            <div class="health-info">
+                <div class="info-item">
+                    <span class="info-label">Last Checkup</span>
+                    <span class="info-value">{{ last_checkup|date:"M j, Y"|default:"No records" }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Next Appointment</span>
+                    <span class="info-value">{{ next_appointment|date:"M j, Y"|default:"None scheduled" }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Pending Tests</span>
+                    <span class="info-value">{{ pending_tests|default:"0" }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Quick Actions</h2>
+            <div class="quick-actions">
+                <a href="{% url 'appointments:schedule' %}" class="action-btn">
+                    <i class="fas fa-calendar-plus"></i>
+                    Book Appointment
+                </a>
+                <a href="{% url 'medicalrecords:list' %}" class="action-btn">
+                    <i class="fas fa-file-medical"></i>
+                    Medical Records
+                </a>
+                <a href="{% url 'messages:inbox' %}" class="action-btn">
+                    <i class="fas fa-inbox"></i>
+                    Messages
+                </a>
+                <a href="{% url 'billing:invoice_list' %}" class="action-btn">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Billing
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

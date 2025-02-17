@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Doctor Dashboard{% endblock %}
+
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome, Dr. {{ user.first_name }}</h1>
+        <p class="last-login">Last login: {{ user.last_login|date:"F j, Y, P" }}</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h2>Today's Schedule</h2>
+            <div class="appointments-list">
+                {% if today_appointments %}
+                    <ul class="activity-list">
+                        {% for appointment in today_appointments %}
+                        <li>
+                            <span class="appointment-time">{{ appointment.date_time|date:"H:i" }}</span>
+                            <span class="appointment-patient">{{ appointment.patient.get_full_name }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="no-data">No appointments scheduled for today</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Patient Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value">{{ total_patients|default:"0" }}</span>
+                    <span class="stat-label">Total Patients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">{{ appointments_week|default:"0" }}</span>
+                    <span class="stat-label">This Week</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">{{ pending_reports|default:"0" }}</span>
+                    <span class="stat-label">Pending Reports</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Quick Actions</h2>
+            <div class="quick-actions">
+                <a href="{% url 'appointments:schedule' %}" class="action-btn">
+                    <i class="fas fa-calendar-plus"></i>
+                    Schedule Appointment
+                </a>
+                <a href="{% url 'medicalrecords:list' %}" class="action-btn">
+                    <i class="fas fa-file-medical"></i>
+                    Medical Records
+                </a>
+                <a href="{% url 'messages:inbox' %}" class="action-btn">
+                    <i class="fas fa-inbox"></i>
+                    Messages
+                </a>
+                <a href="{% url 'accounts:profile' %}" class="action-btn">
+                    <i class="fas fa-user-md"></i>
+                    Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

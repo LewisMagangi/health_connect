@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <p class="last-login">Last login: {{ user.last_login|date:"F j, Y, P" }}</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h2>System Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value">{{ total_users|default:"0" }}</span>
+                    <span class="stat-label">Total Users</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">{{ active_doctors|default:"0" }}</span>
+                    <span class="stat-label">Active Doctors</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">{{ appointments_today|default:"0" }}</span>
+                    <span class="stat-label">Today's Appointments</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Recent Activities</h2>
+            {% if recent_activities %}
+                <ul class="activity-list">
+                    {% for activity in recent_activities %}
+                    <li>
+                        <span class="activity-time">{{ activity.timestamp|date:"H:i" }}</span>
+                        <span class="activity-text">{{ activity.description }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-data">No recent activities</p>
+            {% endif %}
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Quick Actions</h2>
+            <div class="quick-actions">
+                <a href="{% url 'admin:index' %}" class="action-btn">
+                    <i class="fas fa-users-cog"></i>
+                    Admin Panel
+                </a>
+                <a href="{% url 'analytics:analytics_dashboard' %}" class="action-btn">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics
+                </a>
+                <a href="{% url 'accounts:profile' %}" class="action-btn">
+                    <i class="fas fa-cogs"></i>
+                    Settings
+                </a>
+                {% if user.is_superuser %}
+                <a href="{% url 'admin:index' %}logentry/" class="action-btn">
+                    <i class="fas fa-history"></i>
+                    Audit Logs
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
