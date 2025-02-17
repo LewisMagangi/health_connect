@@ -1,6 +1,6 @@
 # Health Connect - Current Project Structure
 
-## Directory Structure as of 2025-02-14 16:33:49
+## Directory Structure as of 2025-02-17 08:46:48
 ```
 health_connect/
 ├── health_connect/
@@ -9,16 +9,26 @@ health_connect/
 │   ├── manage.py
 │   ├── requirements.txt
 │   ├── update_structure.py
+│   ├── urls.py
 │   ├── apps/
 │   │   ├── accounts/
 │   │   │   ├── __init__.py
 │   │   │   ├── admin.py
 │   │   │   ├── apps.py
+│   │   │   ├── forms.py
 │   │   │   ├── models.py
 │   │   │   ├── tests.py
+│   │   │   ├── urls.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
 │   │   │   │   ├── __init__.py
+│   │   │   ├── templates/
+│   │   │   │   ├── accounts/
+│   │   │   │   │   ├── complete_profile.html
+│   │   │   │   │   ├── login.html
+│   │   │   │   │   ├── register.html
+│   │   │   │   │   ├── register_step_one.html
+│   │   │   │   │   ├── register_step_two.html
 │   │   ├── analytics/
 │   │   │   ├── __init__.py
 │   │   │   ├── admin.py
@@ -27,6 +37,7 @@ health_connect/
 │   │   │   ├── tests.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
 │   │   ├── appointments/
 │   │   │   ├── __init__.py
@@ -34,8 +45,10 @@ health_connect/
 │   │   │   ├── apps.py
 │   │   │   ├── models.py
 │   │   │   ├── tests.py
+│   │   │   ├── urls.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
 │   │   ├── billing/
 │   │   │   ├── __init__.py
@@ -43,8 +56,10 @@ health_connect/
 │   │   │   ├── apps.py
 │   │   │   ├── models.py
 │   │   │   ├── tests.py
+│   │   │   ├── urls.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
 │   │   ├── communications/
 │   │   │   ├── __init__.py
@@ -52,9 +67,16 @@ health_connect/
 │   │   │   ├── apps.py
 │   │   │   ├── models.py
 │   │   │   ├── tests.py
+│   │   │   ├── urls.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
+│   │   ├── dashboard/
+│   │   │   ├── __init__.py
+│   │   │   ├── apps.py
+│   │   │   ├── urls.py
+│   │   │   ├── views.py
 │   │   ├── lifestyle/
 │   │   │   ├── __init__.py
 │   │   │   ├── admin.py
@@ -63,6 +85,7 @@ health_connect/
 │   │   │   ├── tests.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
 │   │   ├── medicalproffesionals/
 │   │   │   ├── __init__.py
@@ -72,6 +95,7 @@ health_connect/
 │   │   │   ├── tests.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
 │   │   ├── medicalrecords/
 │   │   │   ├── __init__.py
@@ -79,9 +103,13 @@ health_connect/
 │   │   │   ├── apps.py
 │   │   │   ├── models.py
 │   │   │   ├── tests.py
+│   │   │   ├── urls.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
+│   │   ├── medical_records/
+│   │   │   ├── models.py
 │   │   ├── resources/
 │   │   │   ├── __init__.py
 │   │   │   ├── admin.py
@@ -90,6 +118,7 @@ health_connect/
 │   │   │   ├── tests.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
 │   │   ├── tools/
 │   │   │   ├── __init__.py
@@ -99,17 +128,21 @@ health_connect/
 │   │   │   ├── tests.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
 │   │   ├── users/
 │   │   │   ├── __init__.py
 │   │   │   ├── admin.py
 │   │   │   ├── apps.py
 │   │   │   ├── models.py
+│   │   │   ├── signals.py
 │   │   │   ├── tests.py
 │   │   │   ├── views.py
 │   │   │   ├── migrations/
+│   │   │   │   ├── 0001_initial.py
 │   │   │   │   ├── __init__.py
 │   ├── core/
+│   │   ├── urls.py
 │   │   ├── views.py
 │   ├── docs/
 │   │   ├── current_project_structure.md
@@ -127,6 +160,7 @@ health_connect/
 │   │   │   │   ├── appointments/
 │   │   │   │   │   ├── models.md
 │   │   │   │   ├── architecture/
+│   │   │   │   │   ├── diagram.md
 │   │   │   │   │   ├── model_interactions.md
 │   │   │   │   │   ├── model_relationships.md
 │   │   │   │   ├── billing/
@@ -170,8 +204,25 @@ health_connect/
 │   │   ├── wsgi.py
 │   ├── static/
 │   │   ├── css/
+│   │   │   ├── login.css
 │   │   │   ├── main.css
 │   ├── templates/
 │   │   ├── base.html
 │   │   ├── home.html
+│   │   ├── accounts/
+│   │   │   ├── login.html
+│   │   ├── appointments/
+│   │   │   ├── schedule.html
+│   │   ├── billing/
+│   │   │   ├── invoice_detail.html
+│   │   │   ├── invoice_list.html
+│   │   ├── dashboard/
+│   │   │   ├── admin_dashboard.html
+│   │   │   ├── doctor_dashboard.html
+│   │   │   ├── patient_dashboard.html
+│   │   ├── medicalrecords/
+│   │   │   ├── view.html
+│   │   ├── messages/
+│   │   │   ├── compose.html
+│   │   │   ├── inbox.html
 ```
