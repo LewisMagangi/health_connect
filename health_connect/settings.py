@@ -38,6 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Health Connect Apps in dependency order
+    'apps.users.apps.UsersConfig',
+    'apps.accounts.apps.AccountsConfig',
+    'apps.medicalproffesionals.apps.MedicalProfessionalsConfig',  # Keep old name for now
+    'apps.appointments.apps.AppointmentsConfig',
+    'apps.analytics.apps.AnalyticsConfig',
+    'apps.billing.apps.BillingConfig',
+    'apps.communications.apps.CommunicationsConfig',
+    'apps.lifestyle.apps.LifestyleConfig',
+    'apps.medicalrecords.apps.MedicalRecordsConfig',  # Keep old name for now
+    'apps.resources.apps.ResourcesConfig',
+    'apps.tools.apps.ToolsConfig',
+    'apps.dashboard.apps.DashboardConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +68,11 @@ ROOT_URLCONF = 'health_connect.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'apps/accounts/templates'),
+            # Remove other app template directories until they're implemented
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,6 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -125,3 +145,16 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Authentication settings
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'home'  # Change to 'home' instead of 'dashboard'
+LOGOUT_REDIRECT_URL = 'home'  # Change to redirect to home page after logout
+
+# Authentication backend settings
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+AUTH_USER_MODEL = 'users.User'
