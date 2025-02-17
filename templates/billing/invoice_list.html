@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Invoices - Health Connect{% endblock %}
+
+{% block content %}
+<div class="invoices-container">
+    <div class="invoices-header">
+        <h1>Billing & Invoices</h1>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Search invoices...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="invoices-list">
+        {% if invoices %}
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th>Invoice #</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for invoice in invoices %}
+                    <tr>
+                        <td>{{ invoice.number }}</td>
+                        <td>{{ invoice.date|date:"M d, Y" }}</td>
+                        <td>{{ invoice.description }}</td>
+                        <td>${{ invoice.amount }}</td>
+                        <td><span class="status-badge {{ invoice.status|lower }}">{{ invoice.status }}</span></td>
+                        <td>
+                            <a href="{% url 'billing:invoice_detail' invoice.id %}" class="btn btn-small">View</a>
+                            {% if invoice.status == 'UNPAID' %}
+                            <a href="{% url 'billing:pay_invoice' invoice.id %}" class="btn btn-primary btn-small">Pay Now</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="no-invoices">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <p>No invoices available</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

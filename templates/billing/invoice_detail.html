@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Invoice #{{ invoice.number }} - Health Connect{% endblock %}
+
+{% block content %}
+<div class="invoice-detail-container">
+    <div class="invoice-header">
+        <div class="header-left">
+            <h1>Invoice #{{ invoice.number }}</h1>
+            <span class="status-badge {{ invoice.status|lower }}">{{ invoice.status }}</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-secondary" onclick="window.print()">
+                <i class="fas fa-print"></i> Print
+            </button>
+            {% if invoice.status == 'UNPAID' %}
+            <a href="{% url 'billing:pay_invoice' invoice.id %}" class="btn btn-primary">
+                Pay Now
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="invoice-content">
+        <div class="invoice-info">
+            <div class="provider-info">
+                <h3>Provider</h3>
+                <p>{{ invoice.provider.name }}</p>
+                <p>{{ invoice.provider.address }}</p>
+                <p>{{ invoice.provider.phone }}</p>
+            </div>
+            <div class="patient-info">
+                <h3>Patient</h3>
+                <p>{{ invoice.patient.get_full_name }}</p>
+                <p>{{ invoice.patient.address }}</p>
+                <p>{{ invoice.patient.phone }}</p>
+            </div>
+            <div class="dates-info">
+                <p><strong>Invoice Date:</strong> {{ invoice.date|date:"F j, Y" }}</p>
+                <p><strong>Due Date:</strong> {{ invoice.due_date|date:"F j, Y" }}</p>
+            </div>
+        </div>
+
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in invoice.items.all %}
+                <tr>
+                    <td>{{ item.service }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.date|date:"M d, Y" }}</td>
+                    <td>${{ item.amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right"><strong>Total</strong></td>
+                    <td><strong>${{ invoice.total_amount }}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        {% if invoice.notes %}
+        <div class="invoice-notes">
+            <h3>Notes</h3>
+            <p>{{ invoice.notes }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
