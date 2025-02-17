@@ -3,33 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Health Connect{% endblock title %}</title>
+    <title>Health Connect - {% block title %}{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <header>
         <nav>
-            <div class="nav-brand">Health Connect</div>
+            <div class="nav-brand">
+                <a href="{% url 'home' %}">Health Connect</a>
+            </div>
             <div class="nav-links">
-                <a href="{% url 'home' %}">Home</a>
                 {% if user.is_authenticated %}
-                    <a href="#">Profile</a>
-                    <a href="#">Logout</a>
+                    {% if user.is_staff %}
+                        <a href="{% url 'dashboard:admin_dashboard' %}">Dashboard</a>
+                    {% elif user.is_doctor %}
+                        <a href="{% url 'dashboard:doctor_dashboard' %}">Dashboard</a>
+                    {% else %}
+                        <a href="{% url 'dashboard:patient_dashboard' %}">Dashboard</a>
+                    {% endif %}
+                    <a href="{% url 'appointments:appointment_list' %}">Appointments</a>
+                    <a href="{% url 'medicalrecords:list' %}">Medical Records</a>
+                    <a href="{% url 'messages:inbox' %}">Messages</a>
+                    <a href="{% url 'billing:invoice_list' %}">Billing</a>
+                    <a href="{% url 'accounts:profile' %}">Profile</a>
+                    <a href="{% url 'accounts:logout' %}">Logout</a>
                 {% else %}
-                    <a href="#">Login</a>
-                    <a href="#">Register</a>
+                    <a href="{% url 'accounts:login' %}">Login</a>
+                    <a href="{% url 'accounts:register' %}">Register</a>
                 {% endif %}
             </div>
         </nav>
     </header>
 
-    <main>
+    <div class="content-wrapper">
         {% if messages %}
             <div class="messages">
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tags }}">
                         {{ message }}
+                        <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
                     </div>
                 {% endfor %}
             </div>
@@ -37,10 +51,39 @@
 
         {% block content %}
         {% endblock content %}
-    </main>
-
+    </div>
+    
     <footer>
-        <p>&copy; 2024 Health Connect. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; {% now "Y" %} Health Connect. All rights reserved.</p>
+        </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced alert handling
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                // Add close button if not exists
+                if (!alert.querySelector('.close-btn')) {
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'close-btn';
+                    closeBtn.innerHTML = '&times;';
+                    closeBtn.onclick = function() {
+                        alert.style.animation = 'fadeOut 0.5s ease-out forwards';
+                        setTimeout(() => alert.remove(), 500);
+                    };
+                    alert.appendChild(closeBtn);
+                }
+                
+                // Auto-hide after 5 seconds
+                setTimeout(function() {
+                    if (alert.parentElement) {
+                        alert.style.animation = 'fadeOut 0.5s ease-out forwards';
+                        setTimeout(() => alert.remove(), 500);
+                    }
+                }, 5000);
+            });
+        });
+    </script>
 </body>
 </html>
