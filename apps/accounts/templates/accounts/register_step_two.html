@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Complete Registration - Health Connect{% endblock %}
+
+{% block content %}
+<div class="auth-container register-form">
+    <h2>Complete Your Registration</h2>
+    
+    <form method="post" class="styled-form">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="error-message">
+                        {{ field.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary submit-btn">Complete Registration</button>
+    </form>
+</div>
+{% endblock %}
