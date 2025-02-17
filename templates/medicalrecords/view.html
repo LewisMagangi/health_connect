@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Medical Records - Health Connect{% endblock %}
+
+{% block content %}
+<div class="records-container">
+    <div class="records-header">
+        <h1>Medical Records</h1>
+        <div class="records-actions">
+            <button class="btn btn-primary" id="downloadRecords">
+                <i class="fas fa-download"></i> Download Records
+            </button>
+            <button class="btn btn-secondary" id="shareRecords">
+                <i class="fas fa-share"></i> Share Records
+            </button>
+        </div>
+    </div>
+
+    <div class="records-content">
+        <div class="records-nav">
+            <ul class="nav-tabs">
+                <li class="active"><a href="#summary">Summary</a></li>
+                <li><a href="#visits">Visits</a></li>
+                <li><a href="#medications">Medications</a></li>
+                <li><a href="#lab-results">Lab Results</a></li>
+                <li><a href="#immunizations">Immunizations</a></li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+            <div id="summary" class="tab-pane active">
+                <h2>Health Summary</h2>
+                {% if health_summary %}
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <h3>Vital Statistics</h3>
+                            <ul>
+                                <li>Height: {{ health_summary.height }}</li>
+                                <li>Weight: {{ health_summary.weight }}</li>
+                                <li>Blood Type: {{ health_summary.blood_type }}</li>
+                            </ul>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Allergies</h3>
+                            <ul>
+                                {% for allergy in health_summary.allergies %}
+                                <li>{{ allergy.name }}</li>
+                                {% empty %}
+                                <li>No known allergies</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="no-data">No health summary available</p>
+                {% endif %}
+            </div>
+
+            <div id="visits" class="tab-pane">
+                <h2>Recent Visits</h2>
+                {% if visits %}
+                    <div class="visits-timeline">
+                        {% for visit in visits %}
+                        <div class="visit-card">
+                            <div class="visit-date">{{ visit.date|date:"M d, Y" }}</div>
+                            <div class="visit-details">
+                                <h3>{{ visit.reason }}</h3>
+                                <p>Dr. {{ visit.doctor.name }}</p>
+                                <p>{{ visit.notes|truncatewords:30 }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-data">No visit history available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

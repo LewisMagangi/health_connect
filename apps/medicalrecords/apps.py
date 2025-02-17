@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
-
-class MedicalrecordsConfig(AppConfig):
+class MedicalRecordsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'medicalrecords'
+    name = 'apps.medicalrecords'
+    verbose_name = 'Medical Records'
