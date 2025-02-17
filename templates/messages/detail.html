@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Message Detail - Health Connect{% endblock %}
+
+{% block content %}
+<div class="message-detail-container">
+    <div class="message-header">
+        <h1>{{ message.subject }}</h1>
+        <div class="message-meta">
+            <span class="sender">From: {{ message.sender.get_full_name }}</span>
+            <span class="date">{{ message.created_at|date:"F j, Y P" }}</span>
+        </div>
+    </div>
+
+    <div class="message-body">
+        <p>{{ message.content|linebreaks }}</p>
+    </div>
+
+    <div class="message-actions">
+        <a href="{% url 'messages:compose' %}?reply_to={{ message.pk }}" class="btn btn-primary">
+            <i class="fas fa-reply"></i> Reply
+        </a>
+        <a href="{% url 'messages:inbox' %}" class="btn btn-secondary">
+            Back to Inbox
+        </a>
+    </div>
+</div>
+{% endblock %}

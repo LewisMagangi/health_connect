@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Compose Message - Health Connect{% endblock %}
+
+{% block content %}
+<div class="compose-container">
+    <div class="compose-header">
+        <h1>New Message</h1>
+    </div>
+
+    <form method="post" class="compose-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="recipient">To:</label>
+            <select name="recipient" id="recipient" required>
+                <option value="">Select recipient</option>
+                {% for provider in healthcare_providers %}
+                <option value="{{ provider.id }}">Dr. {{ provider.get_full_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="8" required></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <a href="{% url 'messages:inbox' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

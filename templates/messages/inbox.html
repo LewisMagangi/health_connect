@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Messages - Health Connect{% endblock %}
+
+{% block content %}
+<div class="messages-container">
+    <div class="messages-sidebar">
+        <div class="sidebar-header">
+            <h2>Messages</h2>
+            <a href="{% url 'messages:compose' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> New Message
+            </a>
+        </div>
+        
+        <div class="message-folders">
+            <a href="#inbox" class="folder active">
+                <i class="fas fa-inbox"></i> Inbox
+                {% if unread_count %}
+                <span class="badge">{{ unread_count }}</span>
+                {% endif %}
+            </a>
+            <a href="#sent" class="folder">
+                <i class="fas fa-paper-plane"></i> Sent
+            </a>
+            <a href="#archived" class="folder">
+                <i class="fas fa-archive"></i> Archived
+            </a>
+        </div>
+    </div>
+
+    <div class="messages-list">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="message-item {% if not message.read %}unread{% endif %}">
+                <div class="message-checkbox">
+                    <input type="checkbox" id="msg-{{ message.id }}">
+                </div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="sender">{{ message.sender.get_full_name }}</span>
+                        <span class="date">{{ message.created_at|date:"M d" }}</span>
+                    </div>
+                    <div class="message-subject">{{ message.subject }}</div>
+                    <div class="message-preview">{{ message.content|truncatechars:100 }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-messages">
+                <i class="fas fa-inbox"></i>
+                <p>Your inbox is empty</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="message-detail" id="messageDetail">
+        <!-- Message detail view will be loaded here -->
+    </div>
+</div>
+{% endblock %}
